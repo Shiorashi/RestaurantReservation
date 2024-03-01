@@ -1,5 +1,5 @@
 const express = require('express');
-const {getHospitals,getHospital,createHospital,updateHospital,deleteHospital,getVacCenters} = require('../controllers/hospitals')
+const {getRestaurants, getRestaurant,createRestaurant,updateRestaurant,deleteRestaurant,getVacCenters} = require('../controllers/restaurants')
 
 /**
 * @swagger
@@ -178,8 +178,8 @@ router.use('/:hospitalId/appointments',appointmentRouter)
 
 
 
-router.route('/').get(getHospitals).post(protect, authorize('admin'), createHospital);
+router.route('/').get(getRestaurants).post(protect, authorize('admin'), createRestaurant);
 router.route('/vacCenters').get(getVacCenters);
-router.route('/:id').get(getHospital).put(protect,authorize('admin'), updateHospital).delete(protect,authorize('admin'), deleteHospital);
+router.route('/:id').get(getRestaurant).put(protect,authorize('admin'), updateRestaurant).delete(protect,authorize('admin'), deleteRestaurant);
 
 module.exports = router;

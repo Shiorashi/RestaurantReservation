@@ -1,5 +1,5 @@
 const Appointment = require('../models/Appointment');
-const Hospital = require('../models/Hospital');
+const Hospital = require('../models/Restaurant');
 
 
 exports.getAppointments=async (req,res,next)=>{
