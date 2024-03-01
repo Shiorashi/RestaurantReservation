@@ -59,7 +59,7 @@ app.use(hpp());
 
 app.use(cors());
 
-const hospitals = require ('./routes/hospitals');
+const Restaurant = require ('./routes/restaurants');
 const auth = require('./routes/auth');
 const appointments=require('./routes/appointments');
 
@@ -67,7 +67,7 @@ app.use(mongoSanitize());
 
 
 
-app.use('/api/v1/hospitals' ,hospitals)
+app.use('/api/v1/restaurants' ,Restaurant);
 app.use('/api/v1/auth',auth);
 app.use('/api/v1/appointments',appointments);
 
