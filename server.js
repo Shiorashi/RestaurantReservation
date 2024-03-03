@@ -24,9 +24,9 @@ const swaggerOptions = {
     swaggerDefinition:{
         openapi: '3.0.0',
         info:{
-            title: 'Library API',
+            title: 'Restaurant Reservation',
             version: '1.0.0',
-            description: 'A simple express VacQ API'
+            description: 'A simple express for restaurant reservation'
         },
         servers:[
             {
@@ -61,7 +61,7 @@ app.use(cors());
 
 const Restaurant = require ('./routes/restaurants');
 const auth = require('./routes/auth');
-const appointments=require('./routes/appointments');
+const reservations=require('./routes/reservations');
 
 app.use(mongoSanitize());
 
@@ -69,7 +69,7 @@ app.use(mongoSanitize());
 
 app.use('/api/v1/restaurants' ,Restaurant);
 app.use('/api/v1/auth',auth);
-app.use('/api/v1/appointments',appointments);
+app.use('/api/v1/reservations',reservations);
 
 const PORT=process.env.PORT || 5000;
 
