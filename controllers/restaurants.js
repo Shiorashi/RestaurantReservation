@@ -1,18 +1,4 @@
-
 const Restaurant = require('../models/Restaurant');
-
-const vacCenter = require("../models/VacCenter")
-
-exports.getVacCenters = (req,res,next)=>{
-    vacCenter.getAll((err,data)=>{
-        if(err)
-          res.status(500).send({
-            message:
-               err.message || "Some error occured while retrieving the vaccine centers"
-        });
-        else res.send(data);
-    });
-};
 
 //@desc Get all hospitals
 //@route GET /api/v1/hospitals
@@ -32,7 +18,7 @@ exports.getRestaurants=async(req,res,next)=>{
     let queryStr=JSON.stringify(reqQuery);
     queryStr=queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g,match=>`$${match}`);
 
-    query =Restaurant.find(JSON.parse(queryStr)).populate('appointments');
+    query =Restaurant.find(JSON.parse(queryStr)).populate('reservations');
 
     if(req.query.select){
         const fields=req.query.select.split(',').join(' ');
@@ -43,7 +29,7 @@ exports.getRestaurants=async(req,res,next)=>{
         const sortBy=req.query.sort.split(',').join(' ');
         query=query.sort(sortBy);
     }else{
-        query.sort('-createdAt');
+        query.sort('name');
     }
 
     const page=parseInt(req.query.page,10)||1;
@@ -140,6 +126,4 @@ exports.deleteRestaurant=async(req,res,next)=>{
     }catch(err){
         res.status(400).json({success:false});
     }
-}
-
-
+};
