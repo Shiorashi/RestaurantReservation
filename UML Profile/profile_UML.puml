@@ -1,0 +1,103 @@
+@startuml Restaurant Reservation Use Case Diagram
+left to right direction
+package "RestaurantReservation"{
+    class "<<Application>>\nRestaurantReservation" as RestaurantReservation{}
+
+    class "<<Resource>>\nRestaurants" as ResourceRestaurants{
+        <<GET>> +getRestaurants():Restaurant
+        <<POST>> +createRestaurant():Restaurant
+    }
+
+    class "<<Resource>>\nRestaurant" as ResourceRestaurant1 {
+        <<PUT>> +updateRestaurant(): Restaurant
+        <<DELETE>> +deleteRestaurant(): void
+    }
+
+    class "<<Resource>>\nRestaurant" as ResourceRestaurant2 {
+        <<GET>> +getRestaurant(): Restaurant
+    }
+
+    class "<<Representation>>\nRestaurant" as RepresentationRestaurant {
+        -name
+        -address
+        -district
+        -province
+        -postalcode
+        -tel
+        -openclosetime
+    }
+
+    file "<<Route>>\nAuth" as placeholder{
+    }
+
+    class "<<Resource>>\nAuth" as ResourceGetMe {
+        <<GET>> +getMe() User
+    }
+
+    class "<<Resource>>\nAuth" as ResourceLogOut{
+        <<GET>> +logout() User
+    }
+
+    class "<<Resource>>\nAuth" as ResourceLogIn{
+        <<POST>> +login() User
+    }
+
+    class "<<Resource>>\nAuth" as ResourceRegister{
+        <<POST>> +register() User
+    }
+
+    class "<<Representation>>\nUser" as RepresentationUser {
+        -name
+        -email
+        -telephone_number
+        -role
+        -password
+    }
+
+    class "<<Resource>>\nReservations" as ResourceReservationsGET{
+        <<GET>> +getReservations():Reservation
+        
+    }
+
+    class "<<Resource>>\nReservations" as ResourceReservationsPOST{
+        <<POST>> +createReservation():Reservation
+    }
+
+    class "<<Resource>>\nReservation" as ResourceReservation {
+        <<GET>> +getReservation(): Reservation
+        <<PUT>> +updateReservation(): Reservation
+        <<DELETE>> +deleteReservation(): void
+    }
+
+    class "<<Representation>>\nReservation" as RepresentationReservation {
+        -reservationDate
+        -user
+        -restaurant
+        -createdAt
+    }
+
+    
+
+}
+
+RestaurantReservation ..> ResourceRestaurants:"/restaurants\n<<Path>>"
+ResourceRestaurants ..> ResourceRestaurant1: "/{restaurantId}\n<<Path>>"
+ResourceRestaurants ..> ResourceRestaurant2: "/{restaurantId}\n<<Path>>"
+ResourceRestaurant1 ..> RepresentationRestaurant: "<<use>>"
+ResourceRestaurant2 ..> RepresentationRestaurant: "<<use>>"
+ResourceRestaurant2 ..> ResourceReservationsPOST: "/reservations\n<<path>>"
+ResourceReservationsPOST ..> ResourceReservation: "/{reservationId}\n<<Path>>"
+RestaurantReservation ..> placeholder: "/auth\n<<path>>"
+placeholder ..> ResourceGetMe: "/me\n<<path>>"
+placeholder ..> ResourceLogIn: "/login\n<<path>>"
+placeholder ..> ResourceLogOut: "/logout\n<<path>>"
+placeholder ..> ResourceRegister: "/register\n<<path>>"
+ResourceGetMe ..> RepresentationUser: "<<use>>"
+ResourceLogIn ..> RepresentationUser: "<<use>>"
+ResourceLogOut ..> RepresentationUser: "<<use>>"
+ResourceRegister ..> RepresentationUser: "<<use>>"
+RestaurantReservation ..> ResourceReservationsGET:"/reservations\n<<Path>>"
+ResourceReservationsGET ..> ResourceReservation: "/{reservationId}\n<<Path>>"
+ResourceReservation ..> RepresentationReservation: "<<use>>"
+
+@enduml

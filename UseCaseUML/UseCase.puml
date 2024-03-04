@@ -1,5 +1,4 @@
 @startuml Restaurant Reservation Use Case Diagram
-left to right direction
 actor "User" as user
 rectangle "Restaurant Reservation" as RestaurantReservation {    
     usecase "Register" as register

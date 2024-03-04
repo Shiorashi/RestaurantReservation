@@ -74,7 +74,7 @@ exports.getRestaurant=async(req,res,next)=>{
         const restaurant = await Restaurant.findById(req.params.id);
 
         if(!restaurant){
-            res.status(400).json({success:false});
+            return res.status(400).json({success:false});
         }
         res.status(200).json({success:true,data:restaurant});
     }catch(err){
@@ -102,7 +102,7 @@ exports.updateRestaurant=async(req,res,next)=>{
     })
 
     if(!restaurant){
-        res.status(400).json({success:false});
+        return res.status(400).json({success:false});
     }
     res.status(200).json({success:true, data: restaurant});
    }catch(err){
@@ -118,7 +118,7 @@ exports.deleteRestaurant=async(req,res,next)=>{
         const restaurant = await Restaurant.findById(req.params.id);
 
         if(!restaurant){
-            res.status(400).json({success:false});
+            return res.status(400).json({success:false});
         }
         await restaurant.deleteOne();
         res.status(200).json({success:true,data:{}});
