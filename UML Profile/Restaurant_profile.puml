@@ -1,0 +1,33 @@
+@startuml Restaurant Reservation Use Case Diagram
+left to right direction
+package "RestaurantReservation"{
+    class "<<Application>>\nRestaurantReservation" as RestaurantReservation{}
+
+    class "<<Resource>>\nRestaurants" as ResourceRestaurants{
+        <<GET>> +getRestaurants():Restaurant
+        <<POST>> +createRestaurant():Restaurant
+    }
+
+    class "<<Resource>>\nRestaurant" as ResourceRestaurant {
+        <<GET>> +getRestaurant(): Restaurant
+        <<PUT>> +updateRestaurant(): Restaurant
+        <<DELETE>> +deleteRestaurant(): void
+    }
+
+    class "<<Representation>>\nRestaurant" as RepresentationRestaurant {
+        -name
+        -address
+        -district
+        -province
+        -postalcode
+        -tel
+        -openclosetime
+    }
+
+}
+
+RestaurantReservation ..> ResourceRestaurants:"/restaurants\n<<Path>>"
+ResourceRestaurants ..> ResourceRestaurant: "/{restaurantId}\n<<Path>>"
+ResourceRestaurant ..> RepresentationRestaurant: "<<use>>"
+
+@enduml
