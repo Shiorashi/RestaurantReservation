@@ -44,7 +44,7 @@ UserSchema.pre('save',async function(next){
 });
 
 UserSchema.methods.getSignedJwtToken=function(){
-    return jwt.sign({id:this._id},process.env.JWT_SECRET,{
+    return jwt.sign({id:this._id,name:this.name,email:this.email,telephone_number:this.telephone_number,role:this.role,createdAt:this.createdAt},process.env.JWT_SECRET,{
         expiresIn:process.env.JWT_EXPIRE
     });
 }

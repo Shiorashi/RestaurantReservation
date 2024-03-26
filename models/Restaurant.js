@@ -8,6 +8,9 @@ const RestaurantSchema = new mongoose.Schema({
         trim: true,
         maxlength: [50, 'Name can not be more than 50 characters']
     },
+    picture:{
+        type: String,
+    },
     address: {
         type: String,
         required: [true, 'Please add an address']

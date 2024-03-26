@@ -78,7 +78,7 @@ exports.getRestaurant=async(req,res,next)=>{
         }
         res.status(200).json({success:true,data:restaurant});
     }catch(err){
-        res.status(400).json({success:true});
+        res.status(400).json({success:false});
     }
     
 }
