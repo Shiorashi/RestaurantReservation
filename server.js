@@ -20,6 +20,13 @@ connectDB();
 
 const PORT=process.env.PORT || 5000;
 const app=express();
+app.use(cookieParser());
+
+app.use(express.json());
+
+app.use(helmet());
+
+app.use(xss());
 
 const swaggerOptions = {
     swaggerDefinition:{
@@ -41,13 +48,7 @@ const swaggerOptions = {
 const swaggerDocs=swaggerJsDoc(swaggerOptions);
 app.use('/api-docs',swaggerUI.serve, swaggerUI.setup(swaggerDocs))
 
-app.use(cookieParser());
 
-app.use(express.json());
-
-app.use(helmet());
-
-app.use(xss());
 
 const limiter=rateLimit({
     windowsMs: 10*60*1000,
