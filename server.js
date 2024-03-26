@@ -18,6 +18,7 @@ dotenv.config({path:'./config/config.env'});
 //connect DB here
 connectDB();
 
+const PORT=process.env.PORT || 5000;
 const app=express();
 
 const swaggerOptions = {
@@ -71,7 +72,7 @@ app.use('/api/v1/restaurants' ,Restaurant);
 app.use('/api/v1/auth',auth);
 app.use('/api/v1/reservations',reservations);
 
-const PORT=process.env.PORT || 5000;
+
 
 const server = app.listen(PORT, console.log('Server running in ', process.env.NODE_ENV, 'on ' + process.env.HOST + ':' + PORT));
 
